@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Pet Food Delivery | Farm Fresh Pet</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- LaunchDarkly SDK -->
+    <script src="https://unpkg.com/launchdarkly-js-client-sdk@3"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-logo">Farm Fresh Pet</div>
+        <div class="nav-links">
+            <a href="#plans">Plans</a>
+            <a href="#recipes">Recipes</a>
+            <a href="#about">About</a>
+            <a href="#" class="learn-more-btn" onclick="showTrialPopup()">Learn More</a>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="hero" id="hero-banner">
+        <div class="hero-content">
+            <h1>Fresh, healthy meals delivered for your dog</h1>
+            <p>Start your pup's journey to better health with our 7-day free trial</p>
+            <button class="cta-button" onclick="showTrialPopup()">Try 7 Days Free</button>
+        </div>
+    </section>
+
+    <!-- Trial Popup Modal -->
+    <div class="modal" id="trial-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="hideTrialPopup()">&times;</span>
+            <h2>Start Your Free Trial Today!</h2>
+            <p>Get 7 days of fresh, customized meals for your dog.</p>
+            <form class="trial-form">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit" class="cta-button">Get Started</button>
+            </form>
+            <p class="modal-footnote">No commitment required. Cancel anytime.</p>
+        </div>
+    </div>
+
+    <!-- Main Content Sections -->
+    <section class="features">
+        <h2>Why Choose Farm Fresh Pet?</h2>
+        <div class="feature-grid">
+            <div class="feature">
+                <img src="https://images.unsplash.com/photo-1624926272922-67ef0769d5c5" alt="Fresh Ingredients">
+                <h3>Fresh Ingredients</h3>
+                <p>Human-grade ingredients, perfectly portioned</p>
+            </div>
+            <div class="feature">
+                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee" alt="Customized Plans">
+                <h3>Customized Plans</h3>
+                <p>Tailored to your dog's unique needs</p>
+            </div>
+            <div class="feature">
+                <img src="https://images.unsplash.com/photo-1587897773780-fe72528d5081" alt="Free Delivery">
+                <h3>Free Delivery</h3>
+                <p>Regular deliveries right to your door</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Content -->
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <h3>1. Tell us about your dog</h3>
+                <p>Share your dog's age, weight, and activity level</p>
+            </div>
+            <div class="step">
+                <h3>2. Get your custom meal plan</h3>
+                <p>We'll create a personalized menu just for your pup</p>
+            </div>
+            <div class="step">
+                <h3>3. Regular deliveries</h3>
+                <p>Fresh food delivered on your schedule</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
