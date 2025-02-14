@@ -4,6 +4,31 @@ A demo project that includes:
 1. A subscription-based pet food delivery service website with LaunchDarkly integration for A/B testing
 2. Testing utilities for generating sample data and testing LaunchDarkly variations
 
+## Environment Variables
+
+The project requires two different LaunchDarkly SDK keys:
+
+| Variable | Description | Used In |
+|----------|-------------|----------|
+| LAUNCHDARKLY_CLIENT_KEY | Client-side SDK key for the website | server.py (injected into script.js) |
+| LAUNCHDARKLY_SDK_KEY | Server-side SDK key for testing | variation_test.py |
+
+Set these environment variables before running the respective components:
+
+```bash
+# Bash/Zsh
+export LAUNCHDARKLY_CLIENT_KEY=your-client-side-key
+export LAUNCHDARKLY_SDK_KEY=your-server-side-key
+
+# Windows Command Prompt
+set LAUNCHDARKLY_CLIENT_KEY=your-client-side-key
+set LAUNCHDARKLY_SDK_KEY=your-server-side-key
+
+# Windows PowerShell
+$env:LAUNCHDARKLY_CLIENT_KEY="your-client-side-key"
+$env:LAUNCHDARKLY_SDK_KEY="your-server-side-key"
+```
+
 ## Website Demo
 
 ### Features
@@ -23,8 +48,8 @@ git clone [repository-url]
 cd pet-food-subscription
 ```
 
-2. Configure LaunchDarkly:
-- Replace `YOUR-SDK-KEY` in `script.js` with your LaunchDarkly SDK key
+2. Set up LaunchDarkly:
+- Set the LAUNCHDARKLY_CLIENT_KEY environment variable
 - Create a feature flag named `hero-banner-test` in your LaunchDarkly dashboard with the following structure:
 ```json
 {
@@ -42,7 +67,10 @@ Start the local development server:
 python3 server.py
 ```
 
-Visit http://localhost:3000 in your browser.
+The server will:
+- Start on http://localhost:3000
+- Automatically inject your LaunchDarkly client key into script.js
+- Display a warning if LAUNCHDARKLY_CLIENT_KEY is not set
 
 To stop the server, press Ctrl+C in the terminal.
 
@@ -84,14 +112,8 @@ Setup:
 # Install dependencies
 pip install -r requirements.txt
 
-# Set LaunchDarkly SDK key as environment variable
-export LAUNCHDARKLY_SDK_KEY=your-sdk-key
-
-# For Windows Command Prompt:
-# set LAUNCHDARKLY_SDK_KEY=your-sdk-key
-
-# For Windows PowerShell:
-# $env:LAUNCHDARKLY_SDK_KEY="your-sdk-key"
+# Ensure LAUNCHDARKLY_SDK_KEY is set
+echo $LAUNCHDARKLY_SDK_KEY  # Should show your server-side SDK key
 ```
 
 Usage:
@@ -115,7 +137,7 @@ pet-food-subscription/
 ├── index.html          # Main website
 ├── styles.css          # Website styles
 ├── script.js           # Website JavaScript with LD integration
-├── server.py           # Local development server
+├── server.py           # Local development server with env injection
 ├── generate_data.py    # Data generation utility
 ├── variation_test.py   # LD variation test utility
 └── requirements.txt    # Python dependencies
@@ -125,27 +147,10 @@ pet-food-subscription/
 
 - HTML5/CSS3/JavaScript
 - LaunchDarkly Feature Management
+  * Client-side SDK for website
+  * Server-side SDK for testing
 - Python
   * Local development server
+  * Environment variable injection
   * Test data generation
   * Variation testing
-
-## Environment Variables
-
-The following environment variables are required for the testing utilities:
-
-| Variable | Description |
-|----------|-------------|
-| LAUNCHDARKLY_SDK_KEY | Your LaunchDarkly SDK key for the variation test script |
-
-You can set these permanently in your shell profile or temporarily for a session:
-
-```bash
-# Bash/Zsh
-export LAUNCHDARKLY_SDK_KEY=your-sdk-key
-
-# Windows Command Prompt
-set LAUNCHDARKLY_SDK_KEY=your-sdk-key
-
-# Windows PowerShell
-$env:LAUNCHDARKLY_SDK_KEY="your-sdk-key"
