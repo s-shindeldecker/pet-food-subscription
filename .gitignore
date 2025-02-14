@@ -19,3 +19,5 @@ __pycache__/
 
 # Logs
 *.log
+context_keys.txt
+event_data.csv
