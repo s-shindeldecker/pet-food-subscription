@@ -84,8 +84,14 @@ Setup:
 # Install dependencies
 pip install -r requirements.txt
 
-# Update SDK key
-# Edit variation_test.py and replace YOUR-SDK-KEY with your LaunchDarkly SDK key
+# Set LaunchDarkly SDK key as environment variable
+export LAUNCHDARKLY_SDK_KEY=your-sdk-key
+
+# For Windows Command Prompt:
+# set LAUNCHDARKLY_SDK_KEY=your-sdk-key
+
+# For Windows PowerShell:
+# $env:LAUNCHDARKLY_SDK_KEY="your-sdk-key"
 ```
 
 Usage:
@@ -123,3 +129,23 @@ pet-food-subscription/
   * Local development server
   * Test data generation
   * Variation testing
+
+## Environment Variables
+
+The following environment variables are required for the testing utilities:
+
+| Variable | Description |
+|----------|-------------|
+| LAUNCHDARKLY_SDK_KEY | Your LaunchDarkly SDK key for the variation test script |
+
+You can set these permanently in your shell profile or temporarily for a session:
+
+```bash
+# Bash/Zsh
+export LAUNCHDARKLY_SDK_KEY=your-sdk-key
+
+# Windows Command Prompt
+set LAUNCHDARKLY_SDK_KEY=your-sdk-key
+
+# Windows PowerShell
+$env:LAUNCHDARKLY_SDK_KEY="your-sdk-key"

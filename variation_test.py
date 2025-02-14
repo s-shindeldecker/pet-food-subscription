@@ -3,9 +3,15 @@ from ldclient.config import Config
 import time
 import json
 from datetime import datetime
+import os
+
+# Get SDK key from environment variable
+sdk_key = os.getenv('LAUNCHDARKLY_SDK_KEY')
+if not sdk_key:
+    print("Error: LAUNCHDARKLY_SDK_KEY environment variable is not set")
+    exit(1)
 
 # Initialize the LaunchDarkly client
-sdk_key = "sdk-d59737ae-9197-47ea-aff4-09d0a9e4534e"  # Replace with your SDK key
 ldclient.set_config(Config(sdk_key))
 
 # Get the client instance
