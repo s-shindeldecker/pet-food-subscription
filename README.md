@@ -1,8 +1,12 @@
 # Pet Food Subscription Demo
 
-A demo website for a subscription-based pet food delivery service, featuring LaunchDarkly integration for A/B testing the hero banner.
+A demo project that includes:
+1. A subscription-based pet food delivery service website with LaunchDarkly integration for A/B testing
+2. Testing utilities for generating sample data and testing LaunchDarkly variations
 
-## Features
+## Website Demo
+
+### Features
 
 - Responsive landing page design
 - Interactive trial signup modal
@@ -11,7 +15,7 @@ A demo website for a subscription-based pet food delivery service, featuring Lau
 - "How It Works" section
 - Local development server
 
-## Setup
+### Website Setup
 
 1. Clone the repository:
 ```bash
@@ -30,7 +34,7 @@ cd pet-food-subscription
 }
 ```
 
-## Running Locally
+### Running the Website
 
 Start the local development server:
 
@@ -42,30 +46,80 @@ Visit http://localhost:3000 in your browser.
 
 To stop the server, press Ctrl+C in the terminal.
 
-## A/B Testing
+## Testing Utilities
 
-The hero banner supports A/B testing through LaunchDarkly. You can configure different variations in your LaunchDarkly dashboard using the `hero-banner-test` feature flag.
+The project includes two Python scripts for testing LaunchDarkly functionality:
 
-Example variation:
-```json
-{
-  "image": "https://example.com/new-banner.jpg",
-  "heading": "Healthy, fresh food for your best friend",
-  "subtext": "Try our personalized meal plans risk-free for 7 days"
-}
+### 1. Data Generation Script (generate_data.py)
+
+Generates test data for LaunchDarkly experiments:
+
+- Creates 100 records with the format:
 ```
+"convert_to_paid","user","<UUID>","",<TIMESTAMP>
+```
+- Saves unique context keys to a separate file
+- Useful for creating test data sets
+
+Usage:
+```bash
+python3 generate_data.py
+```
+
+Outputs:
+- event_data.csv: Contains the full event data
+- context_keys.txt: List of unique context keys
+
+### 2. Variation Test Script (variation_test.py)
+
+Tests LaunchDarkly flag evaluations:
+
+- Reads context keys from context_keys.txt
+- Makes variation_detail calls for a boolean flag named "hero-image"
+- Includes microsecond delays between calls
+- Logs detailed results of each evaluation
+
+Setup:
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Update SDK key
+# Edit variation_test.py and replace YOUR-SDK-KEY with your LaunchDarkly SDK key
+```
+
+Usage:
+```bash
+python3 variation_test.py
+```
+
+Output:
+- Creates a timestamped log file (variation_results_YYYYMMDD_HHMMSS.log)
+- Each log entry includes:
+  * Timestamp
+  * Context key
+  * Flag value
+  * Variation index
+  * Evaluation reason
 
 ## Project Structure
 
-- `index.html` - Main HTML file
-- `styles.css` - Stylesheet
-- `script.js` - JavaScript with LaunchDarkly integration
-- `server.py` - Local development server
+```
+pet-food-subscription/
+├── index.html          # Main website
+├── styles.css          # Website styles
+├── script.js           # Website JavaScript with LD integration
+├── server.py           # Local development server
+├── generate_data.py    # Data generation utility
+├── variation_test.py   # LD variation test utility
+└── requirements.txt    # Python dependencies
+```
 
 ## Technologies Used
 
-- HTML5
-- CSS3
-- JavaScript
+- HTML5/CSS3/JavaScript
 - LaunchDarkly Feature Management
-- Python (for local development server)
+- Python
+  * Local development server
+  * Test data generation
+  * Variation testing
